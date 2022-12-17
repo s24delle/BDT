@@ -1,0 +1,42 @@
+Scopo dell'esercitazione è classificare con metodi multivariati un campione di jet prodotti da interazioni protone-protone ad LHC. 
+
+La informazioni sui jet sono salvate nel file FlavTag.root che contiene il TTree FlavTag.
+
+Le variabili nel TTree sono definite seguendo la convenzione algoritmo_variabile dove la stringa algoritmo identifica l'algoritmo per l'identificazione del flavour del jet e la stringa variabile la variabile discriminante ricostruita dall'algoritmo stesso.
+
+Gli algoritmi presenti nel TTree sono
+ip2d : likehood ratio con la significanza del parametro d'impatto traverso delle tracce associate al jet
+ip3d : likehood ratio con le significanze dei parametro d'impatto traverso e longitudinale delle tracce associate al jet
+sv1 : ricostruzione inclusiva del vertice secondario all'interno del jet
+jf : ricostruzione multi-vertice all'interno del jet basata sulla topologia di decadimento degli adroni b
+Le variabili associate agli algoritmi ip2d e ip3d sono
+pb, pc, pu : produttoria dei valori delle funzioni di densità di probabilità per i parametri di impatto delle tracce associate al jet. Rappresentano gli ingredienti per la costruzione delle log-likehood ratio per la discriminazione tra diversi sapori dei jet.
+Le variabili associate agli algoritmi sv1 e jf sono
+m : massa invariante delle tracce, assunte essere pioni, associate al/ai vertice/i ricostruito/i
+efc : frazione dell'energia del jet da particelle cariche associata al/ai vertice/i ricostruito/i
+ntrkv : numero di tracce associate al vertice ricostruito (o ai vertici ricostruiti con almeno due tracce associate)
+n2t : numero di candidati vertici con due tracce
+l2d : distanza nel piano traverso tra il vertice primario e il vertice secondario (o la media dei vertici secondari)
+sig3d : distanza tra il vertice primario e il vertice secondario (o la media dei vertici secondari) divisa per la relativa incertezza
+deltaR : distanza tra l'asse del jet e la direzione del/dei vertice/i ricostruito/i
+Altre variabili sono presenti solo per l'algoritmo sv1 o jf. In particolare
+sv1_l3d : distanza nel piano traverso tra il  vertice primario e il vertice secondario
+jf_nvtx : numero di vertici secondari ricostruiti e con più di una traccia 
+jf_nvtx1t : numero di vertici secondari ricostruiti con una sola traccia  
+Infine, la variabile seguente indica il sapore del quark che ha prodotto il jet. L'informazione è nota in quanto il TTree FlavTag contiene dati simulati. 
+label : indica il tipo di quark che ha prodotto il jet. Il label è 0 per light-flavour jet, 4 per c-jet e 5 per b-jet
+L' esercitazione si divide in diverse fasi
+Analizzare le distribuzioni delle variabili del file FlavTag.root per jet prodotti da diversi quark. Quale tra queste distribuzioni ha maggior poter discriminante ?  Per accedere alle informazioni del TTree sfruttare il browser di ROOT
+  root -l FlavTag.root  
+poi, all'interno di ROOT,
+  new TBrowser
+Per analizzare le distribuzioni delle variabili per jet b/c e light si usi la macro ROOT PlotVar.C, in cui si sfrutta l'accesso diretto al TTree secondo il metodo
+  Draw(const char *varexp, const char *selection, Option_t *option="",Long64_t nentries=kMaxEntries,Long64_t firstentry=0)
+il primo argomento indica il nome della variabile (per ridirezionare su istogramma: >> nome istogramma) e il secondo la selezione
+
+Usare la macro TMVAClassification.C aggiungendo il codice necessario per configurare i diversi classificatori.
+Provare diverse combinazioni di variabili, iniziando preferibilmente da quelle più discriminanti
+Procate a cambiare i parametri settati per i vari metodi di classificazione
+Verificare cosa succede cambiando la definizione di segnale e fondo per le tre categorie del sapore del jet
+Usare la macro applyTMVA.C per verificare le prestazione di un dato metodo di classificazione. La macro può anche essere estesa per salvare le informazioni relative al classificatore ufficiale MV2 per studiarne le differenze rispetto al classificatore costruito.
+Usare la macro makeROC.C per visualizzare la performance in termini di reiezione del fondo vs efficienza di segnale del classificatore costruito.
