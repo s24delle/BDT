@@ -37,6 +37,12 @@ il primo argomento indica il nome della variabile (per ridirezionare su istogram
 Usare la macro TMVAClassification.C aggiungendo il codice necessario per configurare i diversi classificatori.
 Provare diverse combinazioni di variabili, iniziando preferibilmente da quelle più discriminanti
 Procate a cambiare i parametri settati per i vari metodi di classificazione
-Verificare cosa succede cambiando la definizione di segnale e fondo per le tre categorie del sapore del jet
+Verificare cosa succede cambiando la definizione di segnale e fondo per le tre categorie del sapore del jet.
+
 Usare la macro applyTMVA.C per verificare le prestazione di un dato metodo di classificazione. La macro può anche essere estesa per salvare le informazioni relative al classificatore ufficiale MV2 per studiarne le differenze rispetto al classificatore costruito.
+Per eseguire questa macro dare i seguenti comandi:
+.L applyMVA.C
+appl
+applyMVA("BDT")
+
 Usare la macro makeROC.C per visualizzare la performance in termini di reiezione del fondo vs efficienza di segnale del classificatore costruito.
