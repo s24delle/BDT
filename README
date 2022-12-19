@@ -41,8 +41,8 @@ Verificare cosa succede cambiando la definizione di segnale e fondo per le tre c
 
 Usare la macro applyTMVA.C per verificare le prestazione di un dato metodo di classificazione. La macro può anche essere estesa per salvare le informazioni relative al classificatore ufficiale MV2 per studiarne le differenze rispetto al classificatore costruito.
 Per eseguire questa macro dare i seguenti comandi:
+root -l
 .L applyMVA.C
-appl
 applyMVA("BDT")
 
 Usare la macro makeROC.C per visualizzare la performance in termini di reiezione del fondo vs efficienza di segnale del classificatore costruito.
